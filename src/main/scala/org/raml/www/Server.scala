@@ -23,21 +23,36 @@ class WebsiteInstance {
   lazy val spec          = layout_specs( MarkdownUtils.mdFromResource("/md/spec.md") )
 }
 
+object WebsiteInstance {
+  private var cached: Option[WebsiteInstance] = None
+  def get: WebsiteInstance = synchronized {
+    if ( cached.isEmpty ) cached = Some( new WebsiteInstance )
+    cached.get
+  }
+  def reset() = synchronized { cached = None }
+}
+
 object Server extends SimpleRoutingApp {
 
   implicit val actorSystem = ActorSystem()
   lazy val publicDirPath = new File( new File("."), "public").getCanonicalPath + "/"
   private def xml2htmlentity( xml: scala.xml.Node ) = HttpEntity( MediaTypes.`text/html`, "<!DOCTYPE html>\n" + xml.toString )
 
-  lazy val website = new WebsiteInstance
+  def website = WebsiteInstance.get
 
   def main(args: Array[String]): Unit = {
+    val port = Properties.envOrElse("PORT", "8080").toInt
+    startServer("0.0.0.0", port = port){
+      get {
+        pathSingleSlash { complete{ "Hello World" } }
+      }
+    }
+  }
 
+  def main2(args: Array[String]): Unit = {
     def setupPage( str: String, content: scala.xml.Node ) =
       path( str ) { complete{ xml2htmlentity( content ) } } ~
         path( str + ".html" ) { redirect(str, StatusCodes.PermanentRedirect) } ;
-
-
     val port = Properties.envOrElse("PORT", "8080").toInt
     startServer("0.0.0.0", port = port){
       get {
@@ -52,7 +67,7 @@ object Server extends SimpleRoutingApp {
         setupPage("projects", website.projects ) ~
         setupPage("spec", website.spec ) ~
           path("reset") {
-            WebsiteData.reset()
+            WebsiteInstance.reset()
             complete { "data was reset" }
           } ~
           getFromDirectory( publicDirPath )
