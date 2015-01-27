@@ -14,7 +14,7 @@ object WebsiteData {
     import com.novus.salat._
     import com.novus.salat.global.ctx
     val jsonUrl = "https://drive.google.com/uc?export=download&id=0B6knqCd0DIdfRTRQQ1BHUGt3RzQ"
-    val jsonStr = io.Source.fromURL(jsonUrl).mkString
+    val jsonStr = io.Source.fromURL(jsonUrl, "UTF-8").mkString
     grater[WebsiteData] fromJSON jsonStr
   }
   private var cached: Option[WebsiteData] = None
