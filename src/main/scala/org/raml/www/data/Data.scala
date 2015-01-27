@@ -2,8 +2,6 @@ package org.raml.www.data
 
 import org.raml.www.util.MarkdownUtils
 
-import scala.xml.XML
-
 case class MemberData( name: String, role: String, company: String, linkedin: String, twitter: String, image: String, img_class: String  )
 case class WebsiteData( workgroup: Seq[MemberData], stories: Seq[StoryData], quotes: Seq[QuoteData] )
 case class StoryData( id: String, title: Option[String], content: Option[String] )

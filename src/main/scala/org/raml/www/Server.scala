@@ -41,15 +41,6 @@ object Server extends SimpleRoutingApp {
 
   def website = WebsiteInstance.get
 
-  def main2(args: Array[String]): Unit = {
-    val port = Properties.envOrElse("PORT", "8080").toInt
-    startServer("0.0.0.0", port = port){
-      get {
-        pathSingleSlash { complete{ "Hello World" } }
-      }
-    }
-  }
-
   def main(args: Array[String]): Unit = {
     def setupPage( str: String, content: => scala.xml.Node ) =
       path( str ) { complete{ xml2htmlentity( content ) } } ~
@@ -67,9 +58,11 @@ object Server extends SimpleRoutingApp {
         setupPage("licensing", website.licensing ) ~
         setupPage("projects", website.projects ) ~
         setupPage("spec", website.spec ) ~
-          path("reset") {
-            WebsiteInstance.reset()
-            complete { "data was reset" }
+          path("__reset__") {
+            complete {
+              WebsiteInstance.reset()
+              "Cache Reset OK"
+            }
           } ~
           getFromDirectory( publicDirPath )
       }
