@@ -15,7 +15,7 @@ object page_projects extends HtmlBase {
         <div id="section-core">
           <div id="projects-core-header"><h2>Core</h2></div>
           <ul class="projects-source">
-            <li>
+            <li data-tags="owner:raml-workgroup, status:stable, team:core, role:api-architect, role:developer">
               <div class="project-title">
                 <div class="icon"></div>
                 <h3><a href="#tools-raml-spec" class="anchor"><span></span></a>RAML Spec</h3>

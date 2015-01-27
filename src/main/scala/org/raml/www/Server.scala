@@ -50,7 +50,7 @@ object Server extends SimpleRoutingApp {
   }
 
   def main(args: Array[String]): Unit = {
-    def setupPage( str: String, content: scala.xml.Node ) =
+    def setupPage( str: String, content: => scala.xml.Node ) =
       path( str ) { complete{ xml2htmlentity( content ) } } ~
         path( str + ".html" ) { redirect(str, StatusCodes.PermanentRedirect) } ;
     val port = Properties.envOrElse("PORT", "8080").toInt
