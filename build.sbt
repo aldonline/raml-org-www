@@ -11,7 +11,6 @@ lazy val `raml-org-www` = project.in(file("."))
       "io.spray" %% "spray-routing" % "1.3.2",
       "io.spray" %% "spray-caching" % "1.3.2",
       "io.spray" %% "spray-client" % "1.3.2",
-      "io.spray" %% "spray-client" % "1.3.1",
       "com.novus" %% "salat" % "1.9.9",
       "com.typesafe.akka" %% "akka-actor" % "2.3.6",
       "org.scalaz" %% "scalaz-core" % "7.1.0",
