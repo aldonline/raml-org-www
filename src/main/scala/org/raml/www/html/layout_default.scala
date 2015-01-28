@@ -102,7 +102,13 @@ object layout_default extends HtmlBase {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <title>RAML - RESTful API modeling language</title>
-        {css("stylesheets/normalize.css", "stylesheets/pygments.css", "stylesheets/screen.css", "javascripts/source/jquery.fancybox.css?v=2.1.5" ) }
+        {css(
+          "stylesheets/normalize.css",
+          "stylesheets/pygments.css",
+          "stylesheets/screen.css",
+          "javascripts/source/jquery.fancybox.css?v=2.1.5"
+        )}
+        {css(codemirror_css : _*)}
         {js("https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")}
       </head>
       <body id="home">
@@ -122,8 +128,11 @@ object layout_default extends HtmlBase {
         "javascripts/jquery.scrollTo.min.js",
         "javascripts/waypoints.min.js",
         "javascripts/jquery.clipboard.js",
-        "javascripts/custom.js")}
-
+        "javascripts/custom.js",
+        "v2/out/main.js"
+      )}
+        {js(codemirror_js : _*)}
+        {inline_js(s""" window.current_page = "${current_page.getOrElse("xxx")}" """)}
         {inline_js("""  $(".cta-video").fancybox() """)}
         {inline_js(
         """

@@ -11,7 +11,11 @@ object layout_specs extends HtmlBase {
         <title>RAML 0.8</title>
         { css("stylesheets/github-37b6e181a972ce6706fa61ad91a3f4994af90049.css",
         "stylesheets/github2-8159a6c9a2c0054ae5779d7c98fa8d0b5dd25fca.css") }
+        { css(codemirror_css : _*) }
         { inline_css(".previewPage { margin: 64px auto; width: 920px; }") }
+        { js("https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js") }
+        { js("v2/out/main.js") }
+        { js(codemirror_js : _*) }
       </head>
       <body cz-shortcut-listen="true">
         <div class="page">

@@ -13,7 +13,7 @@ import scala.util.Properties
 class WebsiteInstance {
   import org.raml.www.html._
   WebsiteData.reset()
-  lazy val index         = layout_home( page_home() )
+  lazy val index         = layout_home( page_home(), Some("home") )
   lazy val in_the_wild   = layout_regular( page_in_the_wild(), Some("in-the-wild") )
   lazy val licensing     = layout_regular( page_licensing(), Some("licensing") )
   lazy val docs_200      = layout_regular( page_docs_200(), Some("docs-200") )
