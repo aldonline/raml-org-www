@@ -50,6 +50,8 @@ object Server extends SimpleRoutingApp {
       get {
         pathSingleSlash { complete{ xml2htmlentity( website.index ) } } ~
         path("index.html") { redirect("/", StatusCodes.PermanentRedirect) } ~
+        path("spec.html") { redirect("https://github.com/raml-org/raml-spec/blob/master/raml-0.8.md", StatusCodes.TemporaryRedirect) } ~
+        path("spec") { redirect("https://github.com/raml-org/raml-spec/blob/master/raml-0.8.md", StatusCodes.TemporaryRedirect) } ~
         setupPage("about", website.about ) ~
         setupPage("branding", website.branding ) ~
         setupPage("docs", website.docs ) ~
@@ -57,7 +59,7 @@ object Server extends SimpleRoutingApp {
         setupPage("in-the-wild", website.in_the_wild ) ~
         setupPage("licensing", website.licensing ) ~
         setupPage("projects", website.projects ) ~
-        setupPage("spec", website.spec ) ~
+        //setupPage("spec", website.spec ) ~
           path("__reset__") {
             complete {
               WebsiteInstance.reset()
