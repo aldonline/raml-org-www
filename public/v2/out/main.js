@@ -87,15 +87,19 @@
 	    var $code, $pre, cm, code_str;
 	    $pre = $(this);
 	    $code = $pre.find('code');
-	    code_str = $code.text();
-	    $pre.empty();
-	    cm = CodeMirror(this, {
-	      value: code_str,
-	      mode: 'yaml',
-	      theme: 'neo',
-	      readOnly: true
-	    });
-	    return $pre.find('.CodeMirror').css('height', 'auto');
+	    if ($code.length > 0) {
+	      if (true) {
+	        code_str = $code.text();
+	        $pre.empty();
+	        cm = CodeMirror(this, {
+	          value: code_str,
+	          mode: 'yaml',
+	          theme: 'neo',
+	          readOnly: true
+	        });
+	        return $pre.find('.CodeMirror').css('height', 'auto');
+	      }
+	    }
 	  });
 	};
 

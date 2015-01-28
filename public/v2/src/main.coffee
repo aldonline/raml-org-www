@@ -29,11 +29,13 @@ setup_code_snippets = ->
   $('pre').each ->
     $pre = $ @
     $code = $pre.find('code')
-    code_str = $code.text()
-    $pre.empty()
-    cm = CodeMirror @,
-      value:    code_str
-      mode:     'yaml'
-      theme:    'neo'
-      readOnly: yes
-    $pre.find('.CodeMirror').css 'height', 'auto'
+    if $code.length > 0
+      if yes # $code.hasClass('lang-yaml')
+        code_str = $code.text()
+        $pre.empty()
+        cm = CodeMirror @,
+          value:    code_str
+          mode:     'yaml'
+          theme:    'neo'
+          readOnly: yes
+        $pre.find('.CodeMirror').css 'height', 'auto'
